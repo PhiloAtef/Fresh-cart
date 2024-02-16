@@ -59,18 +59,19 @@ export default function Register() {
       <form onSubmit={handleSubmit}>
         <label htmlFor="name" className='my-1'>Name:</label>
         <input value={values.name} type="text" className='form-control mb-3' id='name' name='name' onChange={handleChange} onBlur={handleBlur} />
-
+        {errors.name && touched.name && <p className='alert alert-danger'>{errors.name}</p>}
         <label htmlFor="email" className='my-1'>Email:</label>
         <input value={values.email} type="email" className='form-control mb-3' id='email' name='email' onChange={handleChange} onBlur={handleBlur}/>
-
+        {errors.email && touched.email && <p className='alert alert-danger'>{errors.email}</p>}
         <label htmlFor="password" className='my-1'>Password:</label>
         <input value={values.password} type="password" className='form-control mb-3' id='password' name='password' onChange={handleChange} onBlur={handleBlur}/>
-
+        {errors.password && touched.password && <p className='alert alert-danger'>{errors.password}</p>}
         <label htmlFor="rePassword" className='my-1'>RePassword:</label>
-        <input value={values.repassword} type="password" className='form-control mb-3' id='rePassword' name='rePassword' onChange={handleChange} onBlur={handleBlur}/>
-
+        <input type="password" className='form-control mb-3' id='repassword' name='repassword' onChange={handleChange} onBlur={handleBlur} value={values.repassword} />
+        {errors.repassword && touched.repassword && <p className='alert alert-danger'>{errors.repassword}</p>}
         <label htmlFor="phone" className='my-1'>phone:</label>
         <input value={values.phone} type="tel" className='form-control mb-3' id='phone' name='phone' onChange={handleChange} onBlur={handleBlur}/>
+        {errors.phone && touched.phone && <p className='alert alert-danger'>{errors.phone}</p>}
 
         {/* <div className="alert alert-danger">errorMessage</div> */}
 
