@@ -35,7 +35,6 @@ export default function Register() {
     }else if (!(/^01[0125][0-9]{8}$/).test(values.phone)) {
       errors.phone = "enter valid egyptian number"
     }
-    console.log(errors)
     return errors;
   }
 
