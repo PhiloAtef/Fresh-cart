@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable eqeqeq */
 import { useFormik } from 'formik';
 import React from 'react';
 import * as Yup from 'yup'
@@ -14,6 +16,7 @@ export default function Register() {
     phone: Yup.string().required("Phone is required").matches(/^01[0125][0-9]{8}$/, "Enter valid Egyptian phone number")
   })
 
+  // eslint-disable-next-line no-unused-vars
   function validate(values){
     const errors = {};
     if (values.name == "") {
