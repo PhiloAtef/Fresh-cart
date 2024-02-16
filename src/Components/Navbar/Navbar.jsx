@@ -7,7 +7,7 @@ export default function Navbar() {
   return <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
-        <Link to={'home'} className="navbar-brand">
+        <Link to={'/home'} className="navbar-brand">
           <img src={logo} alt="fresh cart logo" />
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
