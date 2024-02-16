@@ -1,6 +1,18 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import * as Yup from 'yup'
+
 export default function Register() {
+
+  const yupvalidate = Yup.object({
+    name: Yup.string().required("name is required").min(3, "must be larger than 3").max(20,'must be 20 or less'),
+    email: Yup.string()
+    .required("Email is required").matches(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/i,"Invalid email format"),
+    password: Yup.string()
+    .required("Password is required").matches(/^(?=.[\d])(?=.[!@#$%^&])[\w!@#$%^&]{6,16}$/,"Password must contain at least one special character, one number, and must be between 6 to 16 characters"),
+    repassword: Yup.string().required("Re-Password is required").oneOf([Yup.ref("password")], "Password and Re-Password must match"),
+    phone: Yup.string().required("Phone is required").matches(/^01[0125][0-9]{8}$/, "Enter valid Egyptian phone number")
+  })
 
   function validate(values){
     const errors = {};
@@ -49,7 +61,7 @@ export default function Register() {
     onSubmit: () => {
       //calling api and registering form values is called here
       console.log("hi")
-    }, validate
+    }, validationSchema: yupvalidate
   })
 
   return <>
