@@ -15,6 +15,7 @@ import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
 
+  //routing functionality
   const route = createBrowserRouter([{
     path: '', element: <Layout></Layout>, children:[
       {path:'', element: <Navigate to={'home'}></Navigate>},
