@@ -1,10 +1,15 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable eqeqeq */
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup'
+import  axios  from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
+  const [errorMsg, setErrorMsg] = useState('')
+  const [isLoading, setIsLoading]= useState(false)
+  const navigate = useNavigate()
 
   const yupvalidate = Yup.object({
     name: Yup.string().required("name is required").min(3, "must be larger than 3").max(20,'must be 20 or less'),
@@ -53,7 +58,7 @@ export default function Register() {
     return errors;
   }
 
-  const{values, handleSubmit, handleChange, errors, touched, handleBlur} = useFormik({
+  const{values, handleSubmit, handleChange, errors, touched, handleBlur, isValid} = useFormik({
     initialValues:{
       name:'',
       email:'',
@@ -61,9 +66,19 @@ export default function Register() {
       repassword:'',
       phone:''
     },
-    onSubmit: () => {
+    onSubmit: async () => {
+      setErrorMsg('');
       //calling api and registering form values is called here
-      console.log("hi")
+      try {
+        setIsLoading(true);
+        let {data} = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup', values);
+        if (data.message == "success") {
+          navigate('/login')
+        }
+      } catch (error) {
+        setErrorMsg(error.response.data.message);
+      }
+      setIsLoading(false)
     }, validationSchema: yupvalidate
   })
 
@@ -87,12 +102,16 @@ export default function Register() {
         <input value={values.phone} type="tel" className='form-control mb-3' id='phone' name='phone' onChange={handleChange} onBlur={handleBlur}/>
         {errors.phone && touched.phone && <p className='alert alert-danger'>{errors.phone}</p>}
 
-        {/* <div className="alert alert-danger">errorMessage</div> */}
+        {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
+        {isLoading ? 
+        <button disabled type='button' className='btn bg-main px-4 text-white ms-auto d-block'> <i className='fas fa-spin fa-spinner px-3'></i> </button>
+        :
+        <button type='submit' disabled={!isValid || isLoading} className='btn bg-main px-3 text-white ms-auto d-block'>Register</button>
+        }
 
-        {/* <button disabled type='button' className='btn bg-main px-3 text-white ms-auto d-block'> <i className='fas fa-spin fa-spinner'></i> </button> */}
-
-        <button type='submit' className='btn bg-main px-3 text-white ms-auto d-block'>Register</button>
       </form>
     </div>
   </>
 }
+
+
