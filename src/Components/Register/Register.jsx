@@ -14,9 +14,9 @@ export default function Register() {
   const yupvalidate = Yup.object({
     name: Yup.string().required("name is required").min(3, "must be larger than 3").max(20,'must be 20 or less'),
     email: Yup.string()
-    .required("Email is required").matches(/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/i,"Invalid email format"),
+    .required("Email is required").matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,"Invalid email format"),
     password: Yup.string()
-    .required("Password is required").matches(/^(?=.[\d])(?=.[!@#$%^&])[\w!@#$%^&]{6,16}$/,"Password must contain at least one special character, one number, and must be between 6 to 16 characters"),
+    .required("Password is required").matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/,"Password must contain at least one special character, one number, and must be between 6 to 16 characters"),
     repassword: Yup.string().required("Re-Password is required").oneOf([Yup.ref("password")], "Password and Re-Password must match"),
     phone: Yup.string().required("Phone is required").matches(/^01[0125][0-9]{8}$/, "Enter valid Egyptian phone number")
   })
