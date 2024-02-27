@@ -11,6 +11,7 @@ import Brands from "./Components/Brands/Brands";
 import Orders from "./Components/Orders/Orders";
 import Address from "./Components/Address/Address";
 import NotFound from "./Components/NotFound/NotFound";
+import AuthContextProvider from './Contexts/AuthContext';
 
 
 function App() {
@@ -32,7 +33,9 @@ function App() {
     ]
   }])
   return <>
-  <RouterProvider router={route}></RouterProvider>
+  <AuthContextProvider>
+    <RouterProvider router={route}></RouterProvider>
+  </AuthContextProvider>
   </>
 }
 

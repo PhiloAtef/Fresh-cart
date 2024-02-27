@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../../Assets/images/freshcart-logo.svg'
 import { Link } from 'react-router-dom';
+import { authContext } from '../../Contexts/AuthContext';
 
 export default function Navbar() {
+
+  const {userIsLoggedIn, setUserIsLoggedIn} = useContext(authContext)
 
   return <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -14,7 +17,7 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          {userIsLoggedIn && <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link to={'home'} className="nav-link">Home</Link>
             </li>
@@ -30,7 +33,7 @@ export default function Navbar() {
             <li className="nav-item">
               <Link to={'brands'} className="nav-link">Brands</Link>
             </li>
-          </ul>
+          </ul>}
 
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item d-flex align-items-center">
@@ -40,7 +43,10 @@ export default function Navbar() {
               <i className='fab mx-2 fa-youtube'></i>
               <i className='fab mx-2 fa-tiktok'></i>
             </li>
-            <>
+           {userIsLoggedIn? <li className="nav-item">
+              <span className="nav-link cursor-pointer">Logout</span>
+            </li> :
+           <>
               <li className="nav-item">
                 <Link to={'login'} className="nav-link" >Login</Link>
               </li>
@@ -48,9 +54,7 @@ export default function Navbar() {
                 <Link to={'register'} className="nav-link">Register</Link>
               </li>
             </>
-            <li className="nav-item">
-              <span className="nav-link cursor-pointer">Logout</span>
-            </li>
+            }
           </ul>
         </div>
       </div>

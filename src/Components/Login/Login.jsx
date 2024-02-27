@@ -1,12 +1,17 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable eqeqeq */
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as Yup from 'yup'
 import  axios  from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { authContext } from '../../Contexts/AuthContext';
 
 export default function Login() {
+
+  const {userIsLoggedIn, setUserIsLoggedIn} = useContext(authContext)
+
+
   const [errorMsg, setErrorMsg] = useState('')
   const [isLoading, setIsLoading]= useState(false)
   const navigate = useNavigate()
@@ -30,6 +35,8 @@ export default function Login() {
         setIsLoading(true);
         let {data} = await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin', values);
         if (data.message == "success") {
+          setUserIsLoggedIn(true)
+          localStorage.setItem("token", data.token)
           navigate('/home')
         }
       } catch (error) {
