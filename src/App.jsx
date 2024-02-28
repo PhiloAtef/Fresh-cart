@@ -12,6 +12,7 @@ import Orders from "./Components/Orders/Orders";
 import Address from "./Components/Address/Address";
 import NotFound from "./Components/NotFound/NotFound";
 import AuthContextProvider from './Contexts/AuthContext';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 
 
 function App() {
@@ -20,15 +21,17 @@ function App() {
   const route = createBrowserRouter([{
     path: '', element: <Layout></Layout>, children:[
       {path:'', element: <Navigate to={'home'}></Navigate>},
-      {path:'home', element:<Home></Home>},
-      {path:'products', element:<Products></Products>},
       {path:'register',element:<Register></Register>},
       {path:'login', element:<Login></Login>},
-      {path:'cart', element: <Cart></Cart>},
-      {path: 'categories', element: <Categories></Categories>},
-      {path:'brands', element: <Brands></Brands>},
-      {path:'orders', element: <Orders></Orders>},
-      {path: 'addresses', element: <Address></Address>},
+
+      {path:'home', element:<ProtectedRoute><Home/></ProtectedRoute>},
+      {path:'products', element:<ProtectedRoute><Products/></ProtectedRoute> },
+      {path:'cart', element:<ProtectedRoute><Cart/></ProtectedRoute> },
+      {path: 'categories', element:<ProtectedRoute><Categories/></ProtectedRoute> },
+      {path:'brands', element:<ProtectedRoute><Brands/></ProtectedRoute> },
+      {path:'orders', element:<ProtectedRoute> <Orders/></ProtectedRoute>},
+      {path: 'addresses', element:<ProtectedRoute><Address/></ProtectedRoute> },
+
       {path:'*', element: <NotFound></NotFound>}
     ]
   }])
