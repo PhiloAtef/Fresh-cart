@@ -1,11 +1,18 @@
 import React, { useContext } from 'react';
 import logo from '../../Assets/images/freshcart-logo.svg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authContext } from '../../Contexts/AuthContext';
 
 export default function Navbar() {
-
   const {userIsLoggedIn, setUserIsLoggedIn} = useContext(authContext)
+  const navigate = useNavigate()
+
+  function logout(){
+    setUserIsLoggedIn(false)
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
+  
 
   return <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -44,7 +51,7 @@ export default function Navbar() {
               <i className='fab mx-2 fa-tiktok'></i>
             </li>
            {userIsLoggedIn? <li className="nav-item">
-              <span className="nav-link cursor-pointer">Logout</span>
+              <span onClick={logout} className="nav-link cursor-pointer">Logout</span>
             </li> :
            <>
               <li className="nav-item">

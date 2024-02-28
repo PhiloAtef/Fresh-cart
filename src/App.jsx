@@ -13,6 +13,7 @@ import Address from "./Components/Address/Address";
 import NotFound from "./Components/NotFound/NotFound";
 import AuthContextProvider from './Contexts/AuthContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import AuthProtectedRoute from './Components/ProtectedRoute/AuthProtectedRoute';
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
   const route = createBrowserRouter([{
     path: '', element: <Layout></Layout>, children:[
       {path:'', element: <Navigate to={'home'}></Navigate>},
-      {path:'register',element:<Register></Register>},
-      {path:'login', element:<Login></Login>},
+      {path:'register',element:<AuthProtectedRoute><Register/> </AuthProtectedRoute>},
+      {path:'login', element:<AuthProtectedRoute><Login/> </AuthProtectedRoute>},
 
       {path:'home', element:<ProtectedRoute><Home/></ProtectedRoute>},
       {path:'products', element:<ProtectedRoute><Products/></ProtectedRoute> },

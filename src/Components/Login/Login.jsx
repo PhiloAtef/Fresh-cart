@@ -37,7 +37,11 @@ export default function Login() {
         if (data.message == "success") {
           setUserIsLoggedIn(true)
           localStorage.setItem("token", data.token)
-          navigate('/home')
+          if (window.location.pathname == '/login') {
+            navigate('/home')
+          }else{
+            navigate(window.location.pathname)
+          }
         }
       } catch (error) {
         setErrorMsg(error.response.data.message);
