@@ -1,8 +1,9 @@
 import React from 'react'
+import style from './orders.module.css'
 
 function Orders() {
   return (
-    <div>Orders</div>
+    <h1 className={style.h1}>Orders</h1>
   )
 }
 

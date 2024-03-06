@@ -1,8 +1,20 @@
+import axios from 'axios';
 import React from 'react'
 import { Link } from 'react-router-dom';
 
 
 function Product({ product }) {
+
+   async function addProductToCart(productId){
+        const {data} = await axios.post('https://ecommerce.routemisr.com/api/v1/cart', {
+            productId
+        }, {
+            headers: {
+                token: localStorage.getItem('token')
+            }
+        } )
+        console.log(data.data);
+    }
 
 
     return (
@@ -20,7 +32,7 @@ function Product({ product }) {
                         </span>
                     </p>
                 </Link>
-                <button className='btn bg-main text-white w-100 '>+Add To Cart</button>
+                <button onClick={() => addProductToCart(product.id)} className='btn bg-main text-white w-100 '>+Add To Cart</button>
             </div>
         
     )

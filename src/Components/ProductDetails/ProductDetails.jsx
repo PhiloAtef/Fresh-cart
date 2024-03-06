@@ -1,8 +1,16 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Slider from "react-slick";
 
 function ProductDetails() {
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      };
     const {id} = useParams()
     const [productDetails, setProductDetails] = useState({})
     const [isLoading, setIsLoading] = useState(false)
@@ -12,6 +20,7 @@ function ProductDetails() {
         let {data} = await axios.get("https://ecommerce.routemisr.com/api/v1/products/"+id)
         setIsLoading(false)
         setProductDetails(data.data)
+        console.log(data.data)
     }
 
     useEffect(()=>{
@@ -29,7 +38,13 @@ function ProductDetails() {
              <div className='row align-items-center py-5' >
              <div className="col-md-3">
 
-             <img src={productDetails.imageCover} className='w-100' alt=""/>
+             <Slider {...settings}>
+               {productDetails.images?.map((img,index)=>{
+                    return <div key={index}>
+                        <img src={img} className='w-100' alt="" />
+                    </div>
+               })}
+            </Slider>
                
 
              </div>

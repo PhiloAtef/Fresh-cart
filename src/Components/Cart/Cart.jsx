@@ -2,6 +2,9 @@ import React from 'react';
 
 export default function Cart() {
 
+  async function getLoggedInCartProduct(){
+    
+  }
   return <>
 
 
