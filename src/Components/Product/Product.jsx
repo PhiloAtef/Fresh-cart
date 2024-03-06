@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 
 function Product({ product }) {
@@ -7,7 +8,7 @@ function Product({ product }) {
     return (
         
             <div className="product overflow-hidden px-2 py-3 cursor-pointer">
-                <a className='a'>
+                <Link to={'/productDetails/' + product.id} className='a'>
                     <img className='w-100' src={product.imageCover} alt="" />
                     <h5 className='font-sm text-main'>{product.category.name}</h5>
                     <h4>{product.title.split(" ").slice(0, 2).join(" ")}</h4>
@@ -18,7 +19,7 @@ function Product({ product }) {
                             {product.ratingsAverage}
                         </span>
                     </p>
-                </a>
+                </Link>
                 <button className='btn bg-main text-white w-100 '>+Add To Cart</button>
             </div>
         

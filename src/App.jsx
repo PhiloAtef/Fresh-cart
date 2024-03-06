@@ -14,6 +14,7 @@ import NotFound from "./Components/NotFound/NotFound";
 import AuthContextProvider from './Contexts/AuthContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import AuthProtectedRoute from './Components/ProtectedRoute/AuthProtectedRoute';
+import ProductDetails from './Components/ProductDetails/ProductDetails';
 
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
       {path:'brands', element:<ProtectedRoute><Brands/></ProtectedRoute> },
       {path:'orders', element:<ProtectedRoute> <Orders/></ProtectedRoute>},
       {path: 'addresses', element:<ProtectedRoute><Address/></ProtectedRoute> },
+      {path: 'productDetails/:id', element:<ProtectedRoute><ProductDetails/></ProtectedRoute> },
+
 
       {path:'*', element: <NotFound></NotFound>}
     ]

@@ -9,7 +9,6 @@ export default function Home() {
   async function getAllProducts(){
     const {data} = await axios.get('https://ecommerce.routemisr.com/api/v1/products')
     setProducts(data.data)
-    console.log(data.data)
   }
   
   useEffect(()=>{
