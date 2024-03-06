@@ -5,7 +5,7 @@ function Product({ product }) {
 
 
     return (
-        <div className="col-md-3" >
+        
             <div className="product overflow-hidden px-2 py-3 cursor-pointer">
                 <a className='a'>
                     <img className='w-100' src={product.imageCover} alt="" />
@@ -21,7 +21,7 @@ function Product({ product }) {
                 </a>
                 <button className='btn bg-main text-white w-100 '>+Add To Cart</button>
             </div>
-        </div>
+        
     )
 }
 
