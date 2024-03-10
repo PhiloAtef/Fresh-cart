@@ -1,10 +1,19 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 
 export default function Cart() {
 
   async function getLoggedInCartProduct(){
-    
+    const {data} = await axios.get("https://ecommerce.routemisr.com/api/v1/cart", {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    })
   }
+
+  useEffect(()=>{
+    getLoggedInCartProduct();
+  }, [])
   return <>
 
 
