@@ -13,6 +13,7 @@ export default function Cart() {
 
   useEffect(()=>{
     getLoggedInCartProduct();
+    console.log("test")
   }, [])
   return <>
 
