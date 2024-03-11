@@ -5,6 +5,7 @@ import CartProduct from '../CartProduct/CartProduct';
 export default function Cart() {
 
   const [cart, setCart] = useState({})
+  const [timeOutId, setTimeOutId] = useState()
 
   async function getLoggedInCartProduct(){
     try {
@@ -37,8 +38,23 @@ export default function Cart() {
     setCart(data);
   }
 
-  async function updateCartProductCount(productId, count){
-    const {data} = await axios.put('https://ecommerce.routemisr.com/api/v1/cart/')
+   function updateCartProductCount(productId, count){
+    clearTimeout(timeOutId)
+    let x = setTimeout(async () => {
+      if(count == 0){
+        removeProductFromCart(productId)
+       }else{
+        const {data} = await axios.put('https://ecommerce.routemisr.com/api/v1/cart/'+productId, {
+          count
+        }, {
+          headers: {
+            token: localStorage.getItem('token')
+          }
+        })
+        setCart(data);
+       }
+     }, 2500);
+     setTimeOutId(x);
   }
 
   useEffect(()=>{
@@ -52,7 +68,7 @@ export default function Cart() {
       <button onClick={clearCart} className='btn btn-outline-danger d-block ms-auto'>Clear Cart</button>
 
       {cart.data?.products.map((cartProducts, index)=>{
-       return <CartProduct key={index} removeProductFromCart={removeProductFromCart} cartProducts={cartProducts}/>
+       return <CartProduct key={index} updateCartProductCount={updateCartProductCount} removeProductFromCart={removeProductFromCart} cartProducts={cartProducts}/>
       })}
 
       <div className='d-flex justify-content-between'>

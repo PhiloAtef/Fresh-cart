@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 function Product({ product }) {
@@ -13,6 +14,7 @@ function Product({ product }) {
                 token: localStorage.getItem('token')
             }
         } )
+        toast("product added!");
         console.log(data.data);
     }
 

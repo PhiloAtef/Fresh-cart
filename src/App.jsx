@@ -15,6 +15,7 @@ import AuthContextProvider from './Contexts/AuthContext';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import AuthProtectedRoute from './Components/ProtectedRoute/AuthProtectedRoute';
 import ProductDetails from './Components/ProductDetails/ProductDetails';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
   <AuthContextProvider>
     <RouterProvider router={route}></RouterProvider>
   </AuthContextProvider>
+  <ToastContainer/>
   </>
 }
 

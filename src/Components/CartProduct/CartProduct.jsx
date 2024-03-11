@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function CartProduct({cartProducts, removeProductFromCart }) {
+export default function CartProduct({cartProducts, removeProductFromCart, updateCartProductCount }) {
+  const [count, setCount] = useState(cartProducts.count)
   return (
     <div className="cart-product shadow rounded-2 my-3">
         <div className="row align-items-center">
@@ -19,12 +20,12 @@ export default function CartProduct({cartProducts, removeProductFromCart }) {
           <div className="col-md-2">
             <button className='btn text-danger' onClick={()=>removeProductFromCart(cartProducts.product._id)} >Remove</button>
             <div className="d-flex align-items-center">
-              <button  className='btn bg-main text-white mx-2'>-</button>
-              <span>{cartProducts.count}</span>
-              <button  className='btn bg-main text-white mx-2'>+</button>
+              <button onClick={()=> {updateCartProductCount(cartProducts.product._id, count-1); setCount(count-1)}} className='btn bg-main text-white mx-2'>-</button>
+              <span>{count}</span>
+              <button onClick={()=> {updateCartProductCount(cartProducts.product._id,count+1); setCount(count+1)}} className='btn bg-main text-white mx-2'>+</button>
             </div>
           </div>
         </div>
-      </div>//
+      </div>
   )
 }
